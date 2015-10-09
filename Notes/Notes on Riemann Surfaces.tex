@@ -353,11 +353,23 @@
 \newcommand{\bz}{\overline{z}}
 \newcommand{\bw}{\overline{w}}
 \newcommand{\Div}{\mathrm{Div}}
+\newcommand{\PDiv}{\mathrm{PDiv}}
 \newcommand{\ddzj}{\frac{\p}{\p z_j}}
 \newcommand{\ddbzj}{\frac{\p}{\p \bz_j}}
 \newcommand{\ddxj}{\frac{\p}{\p x_j}}
 \newcommand{\ddyj}{\frac{\p}{\p y_j}}
 \newcommand{\const}{\frac{1}{2\pi i}}
+\newcommand{\sm}{\varepsilon}
+\newcommand{\Resz}{\underset{z = 0}{\Res}}
+\newcommand{\Resw}{\underset{w = 0}{\Res}}
+\renewcommand{\div}{\mathrm{div}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\Pic}{\mathrm{Pic}}
+\newcommand{\holo}{holomorphic \,}
+\newcommand{\mero}{meromorphic \,}
+\newcommand{\Supp}{\mathrm{Supp}}
+
+
 
 %%%%%%%%%%%%% new definitions for the positive mass paper %%%%%%%%%
 
@@ -385,7 +397,7 @@
 %\setcounter{secnumdepth}{1} 
 
 \setcounter{section}{0}
-\section{Basic Constructions and Properties}
+\section{Basic Geometric Properties}
 
 \subsection{Some results from complex analysis}
 \subsubsection{Local normal form}
@@ -508,7 +520,9 @@ The converse is straightforward by Lemma~\ref{regularcondition}.
 \end{proof}
 
 \subsubsection{Differential forms}
-Let $M$ be a manifold. We can form the $k$th exterior product $\bigwedge^k T^* M$ and let $E^k(M)$ be the set of $C^\infty$ sections. Linear algebra says 
+Let $M$ be a $C^\infty$ manifold, $f : M \to \IC$ be a function. We write $f = u + i v$. $df = du + i dv$ is a $\IC$-valued $1$-form. It is a section of
+$$ \Hom_\IR (TM, \IC) = \Hom_\IC ( TM \tensor \IC, \IC) \iso T^* M \tensor \IC \iso T^* M \oplus i T^*M $$
+We can form the $k$th exterior product $\bigwedge^k T^* M$ and let $E^k(M)$ be the set of $C^\infty$ sections. Linear algebra says 
 $$ \bigwedge^k (T^* U \tensor \IC) = \bigoplus_{p + q = k} (\bigwedge^p T^{1,0} U) \tensor (\bigwedge^q T^{0, 1} U) $$ 
 Therefore $E_\IC^k(U) = \{ \textit{sections of } T^* U \tensor_\IR \IC \}$, 
 $$ E^k_\IC (U) = \bigoplus_{p + q = k} E^{p, q}(U) $$ 
@@ -553,20 +567,268 @@ Note that $x: X \to \IC$ is a holomorphic function, so $dx$ is a holomorphic $1$
 $$ p(x) = \prod_{j = 0}^{2g} (x - a_j) $$
 $y^{-1}(0) = \{ (a_j, 0), j = 0, 1, \cdots, 2g \}$. Clearly $x^n dx /y$ is holomorphic on $X'$ for all $n \ge 0$, so we are reaally trying to show that these forms are holomorphic at each $(a_j, 0)$. Without loss of generality, we assume $a_0 = 0$.  
 
+
+\begin{definition}
+The order of a meromorphic 1-form $\w$ at $p$ is $n$ if $\w = f(z) dz $ for some coordinate centered at $p$ and $\ord_p f(z) = n$. 
+\end{definition}
+
+\paragraph{Example} Let $X = \IC$. $\ord_0(dz/z) = -1$ and $\ord_0 (z^n dz) = n$. 
+
+\subsubsection{Residues}
+
+In complex analysis we can talk about residues of functions. More generally, suppose suppose $X$ is a Riemann surface and $f \in \fm(X)$. We may ask whether $\Res_p f$ well defined. This is in fact asking whether residues are invariant under change of coordiantes, but we readily see a counterexample. 
+
+\paragraph{Example} Let $X = \IC$, $f = 1/z$. We may want to say $f$ has residue $1$ at the origin. However, under change of coordinate $w = az$ for some $a \neq 0$, the residue becomes $a$. 
+
+Nonetheless, we can talk about residues of meromorphic forms. In the above example, if we instead look at $dz/z$, then 
+$$ \frac{dw}{w} = \frac{a dw}{az} = \frac{dz}{z} $$
+In complex analysis we know that residues can be used to compute line integrals. We may generalize this to a Riemann surface.
+\begin{definition}
+Suppose $\w$ is a holomorphic form on the punctured disk $\Delta^* = \{ z : 0 < |z| < 1 \}$. We can write $\w = f(z) dz$ where $f$ is a holomorphic function on $\Delta^*$ with expansion
+$$ f = \sum_{ n = -\infty}^{\infty} c_n z^n $$ near $0$. Define 
+$$ \Resz \w = c_{-1} = \const \int_{|z| = \sm} \w $$
+for some $\sm < 1$. 
+\end{definition}  
+\begin{remark}
+We readily make the observation that if $g$ is a holomorphic function on $\Delta^*$, then $$
+\Resz dg = 0 $$
+That is, an exact $1$-form always has residue zero. 
+\end{remark}
+
+\begin{proposition}
+The residue does not depend on the choice of holomorphic coordinate. 
+\end{proposition}
+\begin{proof}
+We start from a coordinate $z$ centered at the origin. Suppose $w$ is anther coordinate, so we can write $w = z \varphi(z)$ for some $\varphi \neq 0$ in a neighborhood. We hope to verify 
+$$ \underset{z = 0}{\Res} (\sum_{n = - \infty}^\infty c_n w^n dw) = c_{-1} $$
+We first show that 
+$$ \Resz \frac{d \varphi}{\varphi} = 0 $$
+Since $\varphi(0) \neq 0$, we can write $\varphi(z) = e^{\psi(z)}$ for some $\psi$ holomorphic near $0$. Now 
+$$  \Resz \frac{d \varphi}{\varphi} = \Resz d \psi = 0 $$
+Since $w = z \varphi(z)$, we have that 
+$$ \frac{dw}{w} = \frac{dz}{z} + \frac{d\varphi}{\varphi} $$
+The above implies 
+$$
+\Resz \frac{dw}{w} = \Resz \frac{dz}{z} + \Resz \frac{d\varphi}{\varphi} = 1 
+$$
+For $n \neq -1$, we see that $w^n dw$ is exact. Therefore they have residue zero. Now we are done.
+\end{proof}
+
+Now let $p \in X$ be a point and $f \in \fM(X)$ be a meromorphic function. Choose a coordinate $z$ centered at $p$. We can express $f = z^n \varphi(z)$ for some $n$ and $\varphi(0) \neq 0$. We observe that 
+$$ \frac{df}{f} = \frac{n dz}{z} + \frac{d \varphi}{\varphi}$$
+Hence we obtain the relationship:
+\begin{lemma}
+\label{resord}
+$$ \Res_p \frac{df}{f} = \ord_p f $$
+\end{lemma}
+
+\begin{proposition}
+\label{resandint}
+For all holomorphic coordinate $z$ on $X$ centered at $p$ and all $\sm > 0$ small enough, 
+$$\Res_p \w = \int_{|z| < \sm} \w $$
+\end{proposition}
+
+Now we prove the residue theorem: 
+\begin{theorem}
+Suppose $X$ is a compact Riemann surface. If $\w$ is a nonzero meromorphic $1$-form on $X$, then 
+$$ \sum_{p \in X} \Res_p \w = 0 $$
+\end{theorem}
+\begin{proof}
+The key idea is to use Proposition~\ref{resandint} and Stoke's theorem. 
+Let $S$ be the set of poles of $\w$. It is a finite set since $X$ is compact. For each $p \in S$, choose a coordinate neighborhood $U_p$ with holomorphic coordinate $z_p$ centered at $p$. Without loss of generality, we may assume that $U_p$'s are disjoint and $U_p = \{z_p : |z_p| < 1 \}$. 
+
+Set $X_\sm = X - \cup_p \{ z_p : |z_p| < \sm \} $ for some $\sm < 1$. It is a manifold with boundary. $\w$ is holomorphic on $X_\sm$, so $d \w|_{X_\sm} = 0$. By Stoke's theorem,
+$$ 0 = \int d\w|_{X_\sm} = \int_{\p X_\sm} \w = \sum_{p \in X} - \int_{|z_p| = \sm} \w = - \sum_{p \in X} \Res_p \w $$ 
+\end{proof}
+\begin{remark}
+The residue formula, together with our previous observation, provides another proof of Theorem~\ref{degmero}, since
+$$ \sum_{p \in X} \ord_p f = \sum_{p \in X} \Res_p \frac{df}{f} = 0 $$
+\end{remark}
+
+
 \section{Theory of Divisors}
 
-Let $M$ be a $C^\infty$ manifold, $f : M \to \IC$ be a function. We write $f = u + i v$. $df = du + i dv$ is a $\IC$-valued $1$-form. It is a section of
-$$ \Hom_\IR (TM, \IC) = \Hom_\IC ( TM \tensor \IC, \IC) \iso T^* M \tensor \IC \iso T^* M \oplus i T^*M $$
-
-
-
+\subsection{Basic properties}
+\subsubsection{Definitions}
+Let $X$ be a Riemann surface. A function $D : X \to \IZ$ can also be regarded as a formal sum $\sum_p D(p)[p]$. 
+\begin{definition}
+A divisor on $X$ is a locally finite formal sum $D = \sum_p n_p [p]$.
+\end{definition}
+By locally finite we mean that the set $\{ p \in X : D(p) \neq 0\}$ is discrete, so when $X$ is compact, a divisor has to be a finite sum. 
+The set of divisors, which we denote by $\Div(X)$, is a group with the obvious additive structure. It is a free abelian group generated by the points in $X$. In other words, 
+$$ \Div(X) = \bigoplus_{p \in X} \IZ $$
 
 
 We want to define $L(D) = \{ f \in \fM(X): (f) + D \ge 0 \} \cup \{ 0 \}$. Notation: $\Div(0) = \sum_p \infty [p]$ and hence $\Div(0) \ge D$ for all $D$. 
 
+We use divisors to keep track of zeroes and poles of functions and poles. If $f \in \fM(X)$, we define 
+$$ \div(f) = \sum_{p \in X} \ord_p (f) [p] $$
+which we may also denote simply by $(f)$. 
+
+\paragraph{Example} $X = \IC$, $f(z) = e^z - 1$. Then $f$ has a zero of order $1$ at each $2n \pi i$, so 
+$$ \div(f) = \sum_{n \in \IZ} [2n \pi i] $$
+
+Similarly if $\w$ is a meromorphic 1-form on $X$, 
+we define $$ \div(\w) = \sum_{p \in X} \ord_p(\w)[p]$$
+
+\paragraph{Example} Let $X = \IP^1$, $\w = dz/z$. On $\IC$, $\w$ has a simple pole at $0$. At $\infty$ we need to use coordinate $w = 1/z$ and 
+$$ \frac{dz}{z} = \frac{-w^{-2} dw}{w^{-1}} = - \frac{dw}{w} $$
+$dw/w$ has a simple pole at $w = 0$, so does $dz/z$ at $\infty$. Therefore on $\IP^1$, 
+$$ \div(\frac{dz}{z}) = -[0] - [\infty] $$
+
+For a meromorphic 1-form $\w$ we may also define the residue divisor: 
+$$ \Res(\w) = \sum_{p \in X} \Res_p(\w) [p] $$
+By Lemma~\ref{resord} we see that $\Res(df/f) = \div(f)$. 
+
+\begin{proposition}
+If $f, g \in \fM(X)$ and $\w \neq 0$ is a meromorphic 1-form, then 
+\begin{enumerate}
+\item $\div(fg) =\div(f) + \div(g)$. 
+\item $\div(1/g) = - \div(g)$. 
+\item $\div(f\w) = \div(f) + \div(\w)$. 
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Straightforward. 
+\end{proof}
+
+We can split $\div(f)$ as $\div_0(f) - \div_\infty (f)$, where $\div_0(f)$ is the zero divisor and $\div_\infty(f)$ is the pole divisor. 
+
+\subsubsection{Degree of divisors}
+We assume $X$ is a compact Riemann surface. Define a function $\deg : \Div(X) \to \IZ$ by 
+$$ \deg(\sum_{p \in X} n_p [p]) = \sum_{p \in X} n_p $$
+
+\paragraph{Example} $\deg(\div(f)) = 0$ and $\deg(Res(\w)) = 0$ for all $f \in \fM(X)$ and $\w$ a meromorphic 1-form. 
+
+\begin{definition}
+A principle divisor on a Riemann surface $X$ is a divisor which is the divisor of some $f \in \fM(X)$. 
+\end{definition}
+\begin{definition}
+The divisor class group of $X$ is 
+$$ \Cl(X) = \Div(X)/ \PDiv(X)$$ 
+\end{definition}
+Clearly $\deg$ descends to a map $\Cl(X) \to \IZ$. 
+
+\paragraph{Example} Let $X = \IP^1$, $\w = dz/z$. 
+$ \div(dz/z) = -[0] - [ \infty ]$,
+so $\deg(\div(dz/z)) = -2$. 
+\paragraph{Example} Let $X = \IC/\Lambda$, $\w = dz$. $dz$ has no zeroes and no poles. Therefore $\deg(\div(\w)) = 0$. 
+
+\begin{proposition}
+Any two canonical divisors on any Riemann surface differ by a principle divisor.  
+\end{proposition}
+\begin{proof}
+Suppose $\w_1, \w_2$ are nonzero meromorphic 1-forms. We claim that $\w_2 = h \w_1$ for some $h \in \fM(X)$. Locally we may write $\w_1 = f_1(z) dz$ and $\w_2 = f_2(z) dz$, so $h = f_2/f_1$. We readily check that the definition of $h$ is independent of coordinates. Hence $\div(\w_2) = \div(\w_1) + \div(h)$. 
+\end{proof}
+
+
+\begin{proposition}
+$$\deg : \Cl(\IP^1) \to \IZ$$ is an isomorphism. 
+\end{proposition}
+\begin{proof}
+The map is clearly surjective. Now any degree zero divisor can be written as a linear combination of $([0] - [p])$'s, so we only need to show that these lie in $\PDiv(X)$. When $p = a \in \IC$, we have 
+$$ \div(\frac{z}{z - a}) = [0] - [a] $$
+When $p = \infty$, we have 
+$$ \div(z) = [0] - [\infty] $$  
+\end{proof}
+
+\begin{theorem}
+If $X$ is a compact Riemann surface of genus $g$, then the degree of the canonical divisor is $2g - 2$. 
+\end{theorem}
+\begin{proof}
+We need to assume that we have a non-constant meromorphic function, which we will prove later using analysis. Recall that a meromorphic function gives us a map $f : X \to \IP^1$ and 
+$$ \frac{df}{f} = f^*(\frac{dz}{z}) $$
+\end{proof}
+
+
+
+\subsection{Holomorphic line bundles}
+
+\begin{definition}
+Let $X$ be a Riemann surface. A holomorphic line bundle $L$ on $X$ is a topological space $L$, together with a projection $\pi : L \to X$ with the following properties: 
+\begin{enumerate}
+\item $\pi^{-1}(p) = L_p$ is a complex vector space of dimension $1$ for all $p \in X$. 
+\item Local triviality: There is an open cover $\{ U_\alpha\}$ of $X$ such that there is a homeomorphism $\varphi_\alpha : \IC \times U_\alpha \to L|_U$ that is $\IC$-linear on each fiber and 
+\[
+\begin{tikzcd}
+\IC \times U_\alpha \arrow{dr}{p_2} \arrow{rr}{\varphi_\alpha} && L|_{U_\alpha} \arrow{dl}{\pi} \\
+{} & U 
+\end{tikzcd}
+\]
+\item On each intersection $U_{\alpha \beta} = U_\alpha \cap U_\beta$, the function $g_{\alpha \beta} : U_{\alpha \beta} \to \IC^*$ such that 
+$s_\beta(z) = s_\alpha(z) g_{\alpha \beta}(z)$ is holomorphic. 
+\end{enumerate}
+\end{definition}
+
+If $U_{\alpha \beta \gamma} = U_\alpha \cap U_\beta \cap U_\gamma \neq \emptyset$, $g_{\alpha \gamma} = g_{\alpha \beta} g_{\beta \gamma}$. We say these transitions functions satisfy the cocycle condition. Since line bundles are locally trivial, it is exactly encoded by its transition functions. That is, if we start from an open cover and transition functions that satisfy the cocycle condition, then we can glue up a line bundle.  
+
+\paragraph{Example} We call $T^{1, 0} X$ the holomorphic cotangent bundle. On coordinate neighborhood $(U, z)$, the section $dz$ trivializes the bundle. If $\{ (U_\alpha, z_\alpha) \}$ is a covering of $X$, then the transition functions are given by 
+$$ g_{\alpha \beta} = \frac{d z_\beta}{d z_\alpha}, \text{ since } dz_\beta = \frac{d z_\beta}{d z_\alpha} d z_\alpha $$
+Similarly, $T'X$, the holomorphic tangent bundle, is locally trivialized by $\p/\p z_\alpha$. It is the dual bundle of $T^{1, 0} X$, and its transition functions are 
+$$ g'_{\alpha \beta} = \frac{d z_\alpha}{d z_\beta} $$
+
+\begin{definition}
+A holomorphic section of a holomorphic line bundle $\pi : L \to X$ is a section $s : X \to L$ such that for each $U \subseteq X$, $\sigma : U \to L|_U \iso U \times \IC$ a local trivialization, $s = f \sigma$, $f$ is holomorphic. 
+\end{definition}
+
+\begin{definition}
+A meromorphic section of $\pi: L \to X$ is a holomorphic section of $s : X' \to L|_{X'}$ for some $X' = X - A$, where $A$ is a discrete and closed subset of $X$. 
+\end{definition}
+
+We call holomorphic (resp. meromorphic) sections of $T^{1, 0} X$ holomorphic (resp. meromorphic) 1-forms. 
+
+A line bundle is trivial if and only if it has a nowhere vanishing holomorphic section. 
+
+\paragraph{Example} If $X = \IC/\Lambda$, then $T^{1, 0}X$ is trivial since clearly $dz$ is a nowhere vanishing holomorphic section. If $X = \{ y^2 = p(x) \} \subseteq \IC^2$, where $p(x)$ is some square free cubic polynomial, then $dx/y$ is a trivializing section. 
+
+\begin{notation}
+$$H^0(X, L) = \{ \text{holomorphic sections of } L \}$$
+\end{notation} 
+
+\begin{definition}
+The divisor of a meromorphic section of $L$ is 
+$$ \div(s) = \sum_{ p \in X} \ord_p (s) [p] $$ 
+where $\ord_p(s)$ is defined as $\ord_p(f)$ for some $s = f \sigma$, $\sigma$ is local trivializing section. 
+\end{definition} 
+
+Any clearly any two sections of a line bundle differ by a \mero function. Therefore if we knew that every \holo line bundle had a section, then every line bundle $L$ would give an element of $\Cl(X) = \Div(X)/\PDiv(X)$. 
+
+\begin{definition}
+We define the Picard group 
+$$\Pic(X) = \{ \text{\holo line bundles over }X\}/\text{isomorphism} $$
+where group law is given by $[L_1] + [L_2] = [L_1 \tensor_\IC L_2]$. 
+\end{definition}
+
+The transition functions of a tensor product is the product of those of individual line bundles. 
+
+Now we wish to prove 
+\begin{theorem}
+If $X$ is compact, then $\Pic(X) \iso \Cl(X)$. 
+\end{theorem}
+
+But we start from some propositions. 
+\begin{proposition}
+If $D \in \Div(X)$, then there is a \holo line bundle and $L_D \to X$ and a \mero section $s_D$ with $D = \div(s_D)$. 
+\end{proposition}
+\begin{proof}
+Suppose $D = \sum_p n_p [p]$. Let $ A = \Supp(D) = \{ p : n_p \neq 0 \}$. Let $(U_p, z_p)$ be a coordinate disk centered at $p \in A$. Let $U_0 = X - A$ and $\sU = \{ U_0 \} \cup \{ U_p : p \in A \}$. Without loss of generality, we may assume that these $U_p$'s are disjoint, so that there are no triple intersections in $\sU$. Let $f_p = z_p^{n_p}$ on $U_p$ and $f_0 = 1$ on $U_0$. On the open cover $\fU$ we give transition functions $g_{p0} = z_p^{n_p}$. They automatically satisfy the cocycle condition and hence we have constructed a line bundle $L_D \to X$. 
+\end{proof}
+
+\begin{proposition}
+If $L \to X$ is a line bundle with transition functions $g_{\alpha \beta} : U_{\alpha \beta} \to \IC^*$, then every section $\sigma$ of $L$ is of the form $\sigma|_{U_\alpha} : f_\alpha s_\alpha$ where $f_\alpha = g_{\alpha \beta} f_\beta$. 
+\end{proposition}
+\begin{proof}
+On $U_{\alpha \beta}$, we have that 
+$$ s = f_\alpha s_\alpha = f_\beta s_\beta = f_\beta s_\alpha g_{\alpha \beta} $$
+Therefore $f_\alpha = g_{\alpha \beta} f_\beta$. 
+\end{proof}
+
+
 \begin{proposition}
 Suppose $D \in \Div(X)$. Then $f \cdot s(D) \in H^0(X, \sL_D)$ if and only if $f \in L(D)$.
 \end{proposition}
+
+
 
 \begin{proposition}
 If $X$ is compact and $\deg D = 0$, then $L(D) \neq 0$ if and only if $D$ is principal. 
