@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Basic Constructions and Properties}{1}
+\contentsline {subsection}{\numberline {1.1}Some results from complex analysis}{1}
+\contentsline {subsubsection}{\numberline {1.1.1}Local normal form}{1}
+\contentsline {subsubsection}{\numberline {1.1.2}Fundamental theorem of algebra}{1}
+\contentsline {subsection}{\numberline {1.2}Complex calculus on manifolds}{1}
+\contentsline {subsubsection}{\numberline {1.2.1}Almost complex structures}{1}
+\contentsline {paragraph}{Example}{3}
+\contentsline {paragraph}{Example}{3}
+\contentsline {subsubsection}{\numberline {1.2.2}Holomorphic functions}{3}
+\contentsline {paragraph}{Example}{4}
+\contentsline {subsubsection}{\numberline {1.2.3}Differential forms}{5}
+\contentsline {paragraph}{Example}{6}
+\contentsline {section}{\numberline {2}Theory of Divisors}{7}

@@ -1,0 +1,583 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{latexsym} 
+%\usepackage{epsfig}
+%\usepackage{graphicx}
+%\usepackage[dvips]{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+
+
+\usepackage[matrix,tips,graph,curve]{xy}
+
+\newcommand{\mnote}[1]{${}^*$\marginpar{\footnotesize ${}^*$#1}}
+\linespread{1.065}
+
+\makeatletter
+
+\setlength\@tempdima  {5.5in}
+\addtolength\@tempdima {-\textwidth}
+\addtolength\hoffset{-0.5\@tempdima}
+\setlength{\textwidth}{5.5in}
+\setlength{\textheight}{8.75in}
+\addtolength\voffset{-0.625in}
+
+\makeatother
+
+\makeatletter 
+\@addtoreset{equation}{section}
+\makeatother
+
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
+\newtheorem{conjecture}[equation]{Conjecture}
+\newtheorem{fact}[equation]{Fact}
+\newtheorem{facts}[equation]{Facts}
+\newtheorem*{theoremA}{Theorem A}
+\newtheorem*{theoremB}{Theorem B}
+\newtheorem*{theoremC}{Theorem C}
+\newtheorem*{theoremD}{Theorem D}
+\newtheorem*{theoremE}{Theorem E}
+\newtheorem*{theoremF}{Theorem F}
+\newtheorem*{theoremG}{Theorem G}
+\newtheorem*{theoremH}{Theorem H}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{definitions}[equation]{Definitions}
+%\theoremstyle{remark}
+
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{remarks}[equation]{Remarks}
+\newtheorem{exercise}[equation]{Exercise}
+\newtheorem{example}[equation]{Example}
+\newtheorem{examples}[equation]{Examples}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{question}[equation]{Question}
+\newtheorem{assumption}[equation]{Assumption}
+\newtheorem*{claim}{Claim}
+\newtheorem{answer}[equation]{Answer}
+%%%%%% letters %%%%
+
+\newcommand{\fA}{\mathfrak{A}}
+\newcommand{\fB}{\mathfrak{B}}
+\newcommand{\fC}{\mathfrak{C}}
+\newcommand{\fD}{\mathfrak{D}}
+\newcommand{\fE}{\mathfrak{E}}
+\newcommand{\fF}{\mathfrak{F}}
+\newcommand{\fG}{\mathfrak{G}}
+\newcommand{\fH}{\mathfrak{H}}
+\newcommand{\fI}{\mathfrak{I}}
+\newcommand{\fJ}{\mathfrak{J}}
+\newcommand{\fK}{\mathfrak{K}}
+\newcommand{\fL}{\mathfrak{L}}
+\newcommand{\fM}{\mathfrak{M}}
+\newcommand{\fN}{\mathfrak{N}}
+\newcommand{\fO}{\mathfrak{O}}
+\newcommand{\fP}{\mathfrak{P}}
+\newcommand{\fQ}{\mathfrak{Q}}
+\newcommand{\fR}{\mathfrak{R}}
+\newcommand{\fS}{\mathfrak{S}}
+\newcommand{\fT}{\mathfrak{T}}
+\newcommand{\fU}{\mathfrak{U}}
+\newcommand{\fV}{\mathfrak{V}}
+\newcommand{\fW}{\mathfrak{W}}
+\newcommand{\fX}{\mathfrak{X}}
+\newcommand{\fY}{\mathfrak{Y}}
+\newcommand{\fZ}{\mathfrak{Z}}
+
+\newcommand{\fa}{\mathfrak{a}}
+\newcommand{\fb}{\mathfrak{b}}
+\newcommand{\fc}{\mathfrak{c}}
+\newcommand{\fd}{\mathfrak{d}}
+\newcommand{\fe}{\mathfrak{e}}
+\newcommand{\ff}{\mathfrak{f}}
+\newcommand{\fg}{\mathfrak{g}}
+\newcommand{\fh}{\mathfrak{h}}
+%\newcommand{\fi}{\mathfrak{i}}
+
+\newcommand{\fj}{\mathfrak{j}}
+\newcommand{\fk}{\mathfrak{k}}
+\newcommand{\fl}{\mathfrak{l}}
+\newcommand{\fm}{\mathfrak{m}}
+\newcommand{\fn}{\mathfrak{n}}
+\newcommand{\fo}{\mathfrak{o}}
+\newcommand{\fp}{\mathfrak{p}}
+\newcommand{\fq}{\mathfrak{q}}
+\newcommand{\fr}{\mathfrak{r}}
+\newcommand{\fs}{\mathfrak{s}}
+\newcommand{\ft}{\mathfrak{t}}
+\newcommand{\fu}{\mathfrak{u}}
+\newcommand{\fv}{\mathfrak{v}}
+\newcommand{\fw}{\mathfrak{w}}
+\newcommand{\fx}{\mathfrak{x}}
+\newcommand{\fy}{\mathfrak{y}}
+\newcommand{\fz}{\mathfrak{z}}
+
+
+\newcommand{\sA}{\mathcal{A}\,}
+\newcommand{\sB}{\mathcal{B}\,}
+\newcommand{\sC}{\mathcal{C}}
+\newcommand{\sD}{\mathcal{D}\,}
+\newcommand{\sE}{\mathcal{E}\,}
+\newcommand{\sF}{\mathcal{F}\,}
+\newcommand{\sG}{\mathcal{G}\,}
+\newcommand{\sH}{\mathcal{H}}
+\newcommand{\sI}{\mathcal{I}\,}
+\newcommand{\sJ}{\mathcal{J}\,}
+\newcommand{\sK}{\mathcal{K}\,}
+\newcommand{\sL}{\mathcal{L}\,}
+\newcommand{\sM}{\mathcal{M}\,}
+\newcommand{\sN}{\mathcal{N}}
+\newcommand{\sO}{\mathcal{O}}
+\newcommand{\sP}{\mathcal{P}\,}
+\newcommand{\sQ}{\mathcal{Q}\,}
+\newcommand{\sR}{\mathcal{R}}
+\newcommand{\sS}{\mathcal{S}}
+\newcommand{\sT}{\mathcal{T}\,}
+\newcommand{\sU}{\mathcal{U}\,}
+\newcommand{\sV}{\mathcal{V}\,}
+\newcommand{\sW}{\mathcal{W}\,}
+\newcommand{\sX}{\mathcal{X}\,}
+\newcommand{\sY}{\mathcal{Y}\,}
+\newcommand{\sZ}{\mathcal{Z}\,}
+
+\newcommand{\IA}{\mathbb{A}}
+\newcommand{\IB}{\mathbb{B}}
+\newcommand{\IC}{\mathbb{C}}
+\newcommand{\ID}{\mathbb{D}}
+\newcommand{\IE}{\mathbb{E}}
+\newcommand{\IF}{\mathbb{F}}
+\newcommand{\IG}{\mathbb{G}}
+\newcommand{\IH}{\mathbb{H}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\IK}{\mathbb{K}}
+\newcommand{\IL}{\mathbb{L}}
+\newcommand{\IM}{\mathbb{M}}
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\IO}{\mathbb{O}}
+\newcommand{\IP}{\mathbb{P}}
+\newcommand{\IQ}{\mathbb{Q}}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\IS}{\mathbb{S}}
+\newcommand{\IT}{\mathbb{T}}
+\newcommand{\IU}{\mathbb{U}}
+\newcommand{\IV}{\mathbb{V}}
+\newcommand{\IW}{\mathbb{W}}
+\newcommand{\IX}{\mathbb{X}}
+\newcommand{\IY}{\mathbb{Y}}
+\newcommand{\IZ}{\mathbb{Z}}
+
+
+ \newcommand{\tA}{\mathrm {A}}
+ \newcommand{\tB}{\mathrm {B}}
+ \newcommand{\tC}{\mathrm {C}}
+ \newcommand{\tD}{\mathrm {D}}
+ \newcommand{\tE}{\mathrm {E}}
+ \newcommand{\tF}{\mathrm {F}}
+ \newcommand{\tG}{\mathrm {G}}
+ \newcommand{\tH}{\mathrm {H}}
+ \newcommand{\tI}{\mathrm {I}}
+ \newcommand{\tJ}{\mathrm {J}}
+ \newcommand{\tK}{\mathrm {K}}
+ \newcommand{\tL}{\mathrm {L}}
+ \newcommand{\tM}{\mathrm {M}}
+ \newcommand{\tN}{\mathrm {N}}
+ \newcommand{\tO}{\mathrm {O}}
+ \newcommand{\tP}{\mathrm {P}}
+ \newcommand{\tQ}{\mathrm {Q}}
+ \newcommand{\tR}{\mathrm {R}}
+ \newcommand{\tS}{\mathrm {S}}
+ \newcommand{\tT}{\mathrm {T}}
+ \newcommand{\tU}{\mathrm {U}}
+ \newcommand{\tV}{\mathrm {V}}
+ \newcommand{\tW}{\mathrm {W}}
+ \newcommand{\tX}{\mathrm {X}}
+ \newcommand{\tY}{\mathrm {Y}}
+ \newcommand{\tZ}{\mathrm {Z}}
+%%%%%%% macros %%%%%
+
+%% my definitions %%%
+
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\tr}{\mathrm{tr}}
+%\newcommand{\ind}{\mathrm{ind}}
+
+\renewcommand{\index}{\mathrm{index \,}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Trace}{\mathrm{Trace}\,}
+\newcommand{\Res}{\mathrm{Res}\,}
+\newcommand{\rank}{\mathrm{rank}}
+%\renewcommand{\dim}{\mathrm{dim}}
+
+\renewcommand{\deg}{\mathrm{deg}}
+\newcommand{\spin}{\rm Spin}
+\newcommand{\Spin}{\rm Spin}
+\newcommand{\erfc}{\rm erfc\,}
+\newcommand{\sgn}{\rm sgn\,}
+\newcommand{\Spec}{\rm Spec\,}
+\newcommand{\diag}{\rm diag\,}
+\newcommand{\Fix}{\mathrm{Fix}}
+\newcommand{\Ker}{\mathrm{Ker \,}}
+\newcommand{\Coker}{\mathrm{Coker \,}}
+\newcommand{\Sym}{\mathrm{Sym \,}}
+\newcommand{\Span}{\mathrm{Span \,}}
+\newcommand{\Hess}{\mathrm{Hess \,}}
+\newcommand{\grad}{\mathrm{grad \,}}
+\newcommand{\Center}{\mathrm{Center}}
+\newcommand{\Lie}{\mathrm{Lie}}
+
+
+\newcommand{\ch}{\rm ch} % Chern Character
+
+\newcommand{\rk}{\rm rk} 
+%\renewcommand{\c}{\rm c}  % Chern class
+
+\newcommand{\sign}{\rm sign}
+\renewcommand\dim{{\rm dim\,}}
+\renewcommand\det{{\rm det\,}}
+\newcommand{\dimKrull}{{\rm Krulldim\,}}
+\newcommand\Rep{\mathrm{Rep}}
+\newcommand\Hilb{\mathrm{Hilb}}
+\newcommand\vol{\mathrm{vol}}
+
+\newcommand\QED{\hfill $\Box$} %{\bf QED}} 
+
+\newcommand\Pf{\nonintend{\em Proof. }}
+
+
+\newcommand\reals{{\mathbb R}} 
+\newcommand\complexes{{\mathbb C}}
+\renewcommand\i{\sqrt{-1}}
+\renewcommand\Re{\mathrm Re}
+\renewcommand\Im{\mathrm{Im} \,}
+\newcommand\integers{{\mathbb Z}}
+\newcommand\quaternions{{\mathbb H}}
+
+
+\newcommand\iso{{\, \cong \,}} 
+\newcommand\tensor{{\otimes}}
+\newcommand\Tensor{{\bigotimes}} 
+\newcommand\union{\bigcup} 
+\newcommand\onehalf{\frac{1}{2}}
+%\newcommand\Sym[1]{{Sym^{#1}(\complexes^2)}}
+
+\newcommand\lie[1]{{\mathfrak #1}} 
+\renewcommand\fk{\mathfrak{K}}
+\newcommand\smooth{\mathcal{C}^{\infty}}
+\newcommand\trivial{{\mathbb I}}
+\newcommand\widebar{\overline}
+
+%%%%%Delimiters%%%%
+
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+%\renewcommand{\(}{\left(}
+%\renewcommand{\)}{\right)}
+
+
+%%%% Different kind of derivatives %%%%%
+
+\newcommand{\delbar}{\bar{\partial}}
+\newcommand{\pdu}{\frac{\partial}{\partial u}}
+%\newcommand{\pd}[1][2]{\frac{\partial #1}{\partial #2}}
+
+%%%%% Arrows %%%%%
+%\renewcommand{\ra}{\rightarrow}                   % right arrow
+%\newcommand{\lra}{\longrightarrow}              % long right arrow
+%\renewcommand{\la}{\leftarrow}                    % left arrow
+%\newcommand{\lla}{\longleftarrow}               % long left arrow
+%\newcommand{\ua}{\uparrow}                     % long up arrow
+%\newcommand{\na}{\nearrow}                      %  NE arrow
+%\newcommand{\llra}[1]{\stackrel{#1}{\lra}}      % labeled long right arrow
+%\newcommand{\llla}[1]{\stackrel{#1}{\lla}}      % labeled long left arrow
+%\newcommand{\lua}[1]{\stackrel{#1}{\ua}}      % labeled  up arrow
+%\newcommand{\lna}[1]{\stackrel{#1}{\na}}      % labeled long NE arrow
+
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\tto}{\longmapsto}
+\def\llra{\longleftrightarrow}
+
+\def\d/{/\mspace{-6.0mu}/}
+\newcommand{\git}[3]{#1\d/_{\mspace{-4.0mu}#2}#3}
+\newcommand\zetahilb{\zeta_{{\text{Hilb}}}}
+\def\Fy{\sF \mspace{-3.0mu} \cdot \mspace{-3.0mu} y}
+\def\tv{\tilde{v}}
+\def\tw{\tilde{w}}
+\def\wt{\widetilde}
+\def\wtilde{\widetilde}
+\def\what{\widehat}
+\def\cl{\widebar}
+\def\bf{\textbf}
+\def\it{\textit}
+%%%%%%%%%%%%%%%%%%% Mark's definitions %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\frakg}{\mbox{\frakturfont g}}
+\newcommand{\frakk}{\mbox{\frakturfont k}}
+\newcommand{\frakp}{\mbox{\frakturfont p}}
+\newcommand{\q}{\mbox{\frakturfont q}}
+\newcommand{\frakn}{\mbox{\frakturfont n}}
+\newcommand{\frakv}{\mbox{\frakturfont v}}
+\newcommand{\fraku}{\mbox{\frakturfont u}}
+\newcommand{\frakh}{\mbox{\frakturfont h}}
+\newcommand{\frakm}{\mbox{\frakturfont m}}
+\newcommand{\frakt}{\mbox{\frakturfont t}}
+\newcommand{\G}{\Gamma}
+\newcommand{\g}{\gamma}
+\newcommand{\w}{\omega}
+\newcommand{\mult}{\mathrm{mult}}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\fraka}{\mbox{\frakturfont a}}
+\newcommand{\bp}{\overline{\partial}}
+\newcommand{\dbs}{\bar{\partial}^*}
+\newcommand{\p}{\partial}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\bi}{\mathbf{1}}
+\newcommand{\Ann}{\mathrm{Ann}}
+\newcommand{\height}{\mathrm{height \,}}
+
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\bz}{\overline{z}}
+\newcommand{\bw}{\overline{w}}
+\newcommand{\Div}{\mathrm{Div}}
+\newcommand{\ddzj}{\frac{\p}{\p z_j}}
+\newcommand{\ddbzj}{\frac{\p}{\p \bz_j}}
+\newcommand{\ddxj}{\frac{\p}{\p x_j}}
+\newcommand{\ddyj}{\frac{\p}{\p y_j}}
+\newcommand{\const}{\frac{1}{2\pi i}}
+
+%%%%%%%%%%%%% new definitions for the positive mass paper %%%%%%%%%
+
+\newcommand{\sperp}{{\scriptscriptstyle \perp}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%
+\begin{document}
+%
+
+\title{Notes on Riemann Surfaces}
+\author{Ziquan Yang}
+
+
+\date{\today}
+
+\maketitle
+ 
+\tableofcontents
+%\setcounter{secnumdepth}{1} 
+
+\setcounter{section}{0}
+\section{Basic Constructions and Properties}
+
+\subsection{Some results from complex analysis}
+\subsubsection{Local normal form}
+Suppose $h : \Delta \to \Delta$ is a holomorphic function and $h(0) = 0$. 
+
+\subsubsection{Fundamental theorem of algebra}
+\subsection{Complex calculus on manifolds}
+
+\subsubsection{Almost complex structures}
+Suppose $U \subseteq \IC^n$ be an open subset. We want to decide when $f$ is holomorphic. We start by looking at the tangent bundles. Let $z_j = x_j + iy_j : U \to \IC$ and $x_j, y_j : U \to \IR$ are sections of $T^* U$. Here by $T^* U$ we mean the real tangent space of $U \subseteq \IC^n \iso \IR^{2n}$. Similarly we want to say $dz_j = dx_j + i dy_j$ is a section of $T^* U \tensor_\IR \IC = \Hom_\IR(TU, \IC)$. We also have $d\bz = dx_j - i dy_j$ as sections of $T^* U \tensor_\IR \IC$. We may often omit the subscript $\IR$, but it is important to keep in mind that when we are dealing with these situations $\tensor_\IR$ is assumed. Clearly $dx, dy$ and $dz, d\bz$ span the same space, since
+$$ [dz, d\bz] = [dx, dy] \begin{bmatrix}
+1 & 1 \\ i & -1 
+\end{bmatrix}  $$
+and matrix has determinant $-2i$. We may either use basis $dx_j, dy_j$'s or $dz_j, d\bz_j$'s. For the latter we set the dual basis
+$$ \ddzj = \half( \ddxj - i \ddyj ), \, \ddbzj = \half (\ddxj + i \ddyj) $$
+Now we may write 
+$$ df = \sum_{j = 1}^n (\frac{\p f}{\p z_j} dz_j + \frac{\p f}{\p \bz_j} d
+\bz_j) $$
+
+
+We would like to endow the bundle $TU$ with the structure of a complex vector bundle, so we need to give an action of $\IC$ on fibers. We would like to say 
+$$ i \ddxj = \ddyj $$
+We define $J : TU \to TU$ by 
+$$ J(\ddxj) = \ddyj, \, J(\ddyj) = -i \ddxj$$
+Note that $J^2 = - 1$. Hence we obtain an action of $\IC \iso \IR[J]/(J^2 + 1)$ on $V_\IR$, where $V_\IR$ is a fiber of $TU$. 
+
+\begin{lemma}
+\label{decomp}
+Let $V$ be a finite dimensional real vector space and $J : V \to V$ be a $\IR$-linear map satisfying $J^2 = -1$. Then $V \tensor \IC = V^1 \oplus V^2 \iso V \oplus i V $, where 
+\begin{align*}
+V' &= \{ v - i J v : v \in V \} \\
+V'' &= \{ v + i J v : v \in V \} 
+\end{align*}
+Moreover $J|_{V'} = i, J|_{V''} = - i$. 
+\end{lemma}
+\begin{proof}
+Straightforward verification. 
+\end{proof}
+\begin{remark} 
+Let $J : V \to V$ be as above. We want to define a conjugate operation $V \tensor \IC \to V \tensor \IC$ given by $a + i b \mapsto a - i b$, where $a, b \in V$. Note that $\overline{V'} = V''$. 
+\end{remark}
+
+\paragraph{Example} Consider a fiber $T_p U$. Suppose we have already defined $J$. Then we can write $T_p U \tensor \IC = T_p' U \oplus T''_p U$, where $J$ acts on the first component by $i$ and the second by $- i$. 
+$T_p' U$ is spanned by 
+$$ \ddxj - i J(\ddyj) = \ddxj - i \ddyj = 2 \ddzj $$
+and $T_p'' U $ is spanned by 
+$$ \ddxj + i J(\ddyj) = \ddxj + i \ddyj = 2 \ddbzj $$
+
+\begin{lemma}
+The composite map $ \varphi' : V \to V \tensor \IC \iso V' \oplus V'' \to V' $ is complex-linear. Similarly, the composite map $\varphi'' : V \to V''$ is conjugate-linear. 
+\end{lemma}
+\begin{proof}
+Recall that $i$ acts on $V$ as $J$, so being complex linear just means 
+$$ \varphi'(J v) = \half(J v - i J^2 v) = \half(J v + i v) = \half i(v - i Jv) = i \varphi'(v) $$
+\end{proof}
+
+\paragraph{Example} Again we look at how this applies to a fiber $T_p U$. Consider $\varphi' : T_p U \to T'_p U$. We have 
+\begin{align*}
+\ddxj &\mapsto \ddzj \\
+\ddyj &\mapsto \ddbzj 
+\end{align*}
+$J$ serves to permute the vectors in both columns. 
+
+\subsubsection{Holomorphic functions}
+\begin{definition}
+A smooth function $f : U \to \IC$ is holomorphic at $p \in U$ if 
+$$ Df : T_p U \to T_p \IC = \IC $$
+is $\IC$-linear with respect to $J$. 
+\end{definition}
+Equivalently, we could also require that the induced map $T_p U \tensor_\IR \IC \to T_p \IC \tensor_\IR \IC$ commutes with $J$. 
+
+Note that $J : V \to V$ induces a natural map $J : V^* \to V^*$. $J$ is self-ajoint in that 
+$$ \< J \varphi , v \> = \< \varphi, J v \>, \forall \varphi \in V^*, v \in V $$
+which can be verified by straigtforward computation. We let $J$ to act on the cotangent spaces as well, so by Lemma~\ref{decomp} we have a decomposition
+$$ T^*_p U \tensor \IC = T^{1, 0}_p U \oplus T^{0, 1}_p U $$
+where $J$ acts on $T^{1, 0}_p U$ as $i$ and on $T^{0, 1}_p U$ as $-i$. $T^{1, 0}_p U$ is spanned by $dz_1, \cdots, dz_n$ and $T^{0, 1}_p U$ is spanned by $d\bz_1, \cdots, d\bz_n$. 
+Looking back to $f$, we see that $Df_p$ pulls $dw \in T_{f(p)}^* \IC \tensor_\IR \IC$ to $T^{1, 0}_p U$ and $d\bw$ to $T^{0, 1}_p U$. 
+
+Write $w = f(z_1, \cdots, z_n)$. We see that 
+$$
+dw \mapsto df = \sum_{j = 1}^n \frac{\p f}{\p z_j} dz_j + \frac{\p f}{\p \bz_j} d\bz_j
+$$  
+and similarly $d \bw = d \overline{f}$. Recall that $d$ is a real operator, so $d \overline{f} = \overline{df}$. Now we make an important observation: 
+\begin{align*}
+(Df)^* \textit{ commutes with } J &\iff Df^*(dw) \textit{ has type }(1, 0)\\
+&\iff df \textit{ has type }(1, 0) \\
+&\iff \frac{\p f}{\p \bz_j} = 0, \, j = 1, \cdots, n
+\end{align*}
+
+\paragraph{Example} Let us look at the case $n = 1$. Write $f = u + iv$, where $u, v : U \to \IC$. Recall that 
+$$ \frac{\p}{\p \bz} = \half( \frac{\p}{\p x} + i \frac{\p}{\p y}) $$ 
+and hence 
+$$ 2 \frac{\p f}{\p \bz} = (u_x - v_y) + i ( u_y + v_x ) $$
+Therefore $f$ is holomorphic in our new definition if and only if it satisfies the Cauchy-Riemann equations. We can also readily make the following observation: 
+\begin{lemma}
+\label{regularcondition}
+$f : U \to \IC$ is holomorphic if and only if it is holomophic in each coordinate, i.e. for all $(a_1, \cdots, a_n) \in U$ and $j = 1, \cdots, n$ the function 
+$$ z \mapsto f(a_1, \cdots, a_{j - 1}, z, a_{j + 1}, \cdots, a_n) $$
+is holomorphic. 
+\end{lemma}
+
+We say a function is \textit{analytic} if at each point it is given by a convergent power series. If $n = 1$, then it is well know that $f : U \to \IC$ is holomorphic if and only if it is analytic. We would like to extend this property to higher dimensions. Let $\Delta(z_j)$ denote copy of open disk of radius $r_j$ whose coordinate is labelled $z_j$. We have the following theorem. 
+
+\begin{theorem}
+A smooth function $f : \Delta(z_1) \times \cdots \times \Delta(z_n) \to \IC$ is holomorphic if and only if there is a power series 
+$$ \sum_K c_K z_1^{k_1} \cdots z_n^{k_n}, \, K = (k_1, \cdots, k_n) \in \IN^n $$
+that converges to $f(z_1, \cdots, z_n)$. 
+\end{theorem}
+\begin{proof}
+Suppose $f$ is holomophic on $U$. Choose $(s_1, \cdots, s_n) \in \IR^n_{> 0}$ such that $|z_j| < s_j < r_j$. Then 
+\begin{align*}
+f(z_1, \cdots, z_n) &= \const  \int_{|w_n| = s_n} \frac{f(z_1, \cdots, z_{n-1}, w_n)}{w_n - z_n} dw_n \\
+&= (\const)^2 \int_{|w_n| = s_n} \int_{|w_{n - 1}| = s_{n -1}} \frac{f(z_1, \cdots, w_{n-1}, w_n)}{(w_n - z_n)(w_{n - 1} - z_{n -1})} dw_{n-1} dw_n \\
+&= \cdots \\
+&= (\const)^n \int \int \cdots \int \frac{f(w_1, \cdots, w_n)}{\prod_{j = 1}^n ( w_j - z_j)} dw_1 \cdots dw_n
+\end{align*}
+Therefore we only need to expand the denominators: 
+$$ \frac{1}{w_j - z_j} = \frac{1}{w_j} \sum_{n = 0}^\infty \frac{1}{w_j^n} z_j^n $$
+The converse is straightforward by Lemma~\ref{regularcondition}. 
+\end{proof}
+
+\subsubsection{Differential forms}
+Let $M$ be a manifold. We can form the $k$th exterior product $\bigwedge^k T^* M$ and let $E^k(M)$ be the set of $C^\infty$ sections. Linear algebra says 
+$$ \bigwedge^k (T^* U \tensor \IC) = \bigoplus_{p + q = k} (\bigwedge^p T^{1,0} U) \tensor (\bigwedge^q T^{0, 1} U) $$ 
+Therefore $E_\IC^k(U) = \{ \textit{sections of } T^* U \tensor_\IR \IC \}$, 
+$$ E^k_\IC (U) = \bigoplus_{p + q = k} E^{p, q}(U) $$ 
+
+$E^{**}(U)$ is a bigraded algebra with operators $\p, \bp$. We define a map 
+$$ d : E^0(X) \to E^{1, 0} \oplus E^{0, 1} $$ by $df = \p f + \bp f$, where $$\p f = \sum_{j = 1}^n \frac{\p f}{\p z_j} dz_j, \, \, \bp f = \sum_{j = 1}^n \frac{\p f}{\p \bz_j} d\bz_j$$ Note that $f : X \to \IC$ is a priori, only a $C^\infty$ function. It is holomorphic if and only if $\bp f = 0$. $\p, \bp$ extend to maps $E^{p,q}(X) \to E^{p+1, q}(X), E^{p, q}(X) \to E^{p, q+1}(X)$ and they still satisfy $\p^2 , \bp^2 = 0$. 
+
+\begin{theorem}
+Every complex manifold has a natural orientation. 
+\end{theorem}
+
+\begin{definition}
+A holomorphic $1$-form on a Riemann surface $X$ is a closed $1$-form of type $(1, 0)$. 
+\end{definition}
+
+At the first spot of the definition, I find the requirement that the form must be closed a bit weird, but the following lemma tells us that closedness is exactly describing the condition of being ``locally holomorphic". 
+
+\begin{lemma}
+Let $f(z) dz$ be a $(1, 0)$-form on the disk $\Delta$. TFAE:
+\begin{enumerate}[a.]
+\item $f(z)dz$ is holomorphic. 
+\item $f(z)$ is holomorphic. 
+\item $\bp(f(z)dz) = 0$. 
+\end{enumerate} 
+\end{lemma}
+\begin{proof}
+\begin{align*}
+d(fdz) &= df \wedge dz = (\frac{\p f}{\p z} dz + \frac{\p f}{\p \bz} d \bz) \wedge dz = \frac{\p f}{\p \bz} d \bz \wedge d z = 2i \frac{\p f}{\p \bz} dx \wedge dy
+\end{align*}
+Therefore 
+$$ d(f(z)dz) = 0 \iff \frac{\p f}{\p \bz} = 0 \iff f \textit{ is holomorphic}$$
+To show $a \iff c$, we first show that $\bp (dz) = 0$. Since $d^2 z = 0$, we know that $(\p + \bp) dz = 0$. $\p (dz)$ is a $(2, 0)$ form, but there is none. Therefore $\bp(dz) = 0$. Now 
+$$ \bp (fdz) = \bp f \wedge dz = \frac{\p f}{\p \bz} d\bz \wedge dz = d(fdz) $$
+\end{proof}
+\begin{remark}
+More generally, on a Riemann surface $X$, if $f : X \to \IC$ is a holomorphic function, then $df$ is a holomorphic $1$-form. 
+\end{remark}
+
+\paragraph{Example} Label the coordinates of $\IC^2$ by $(x, y)$. Let $X \subseteq \IC^2$ be the curve defined by $y^2 = p(x)$, where $p(x)$ is some square-free polynomial. Suppose the degree of $p(x)$ is $2g + 1$. We claim that 
+$$ \frac{dx}{y}, \frac{x dx}{y}, \cdots, \frac{x^{g - 1} dx}{y} $$
+Note that $x: X \to \IC$ is a holomorphic function, so $dx$ is a holomorphic $1$-form. Let $X' = X - y^{-1}(0)$. If 
+$$ p(x) = \prod_{j = 0}^{2g} (x - a_j) $$
+$y^{-1}(0) = \{ (a_j, 0), j = 0, 1, \cdots, 2g \}$. Clearly $x^n dx /y$ is holomorphic on $X'$ for all $n \ge 0$, so we are reaally trying to show that these forms are holomorphic at each $(a_j, 0)$. Without loss of generality, we assume $a_0 = 0$.  
+
+\section{Theory of Divisors}
+
+Let $M$ be a $C^\infty$ manifold, $f : M \to \IC$ be a function. We write $f = u + i v$. $df = du + i dv$ is a $\IC$-valued $1$-form. It is a section of
+$$ \Hom_\IR (TM, \IC) = \Hom_\IC ( TM \tensor \IC, \IC) \iso T^* M \tensor \IC \iso T^* M \oplus i T^*M $$
+
+
+
+
+
+We want to define $L(D) = \{ f \in \fM(X): (f) + D \ge 0 \} \cup \{ 0 \}$. Notation: $\Div(0) = \sum_p \infty [p]$ and hence $\Div(0) \ge D$ for all $D$. 
+
+\begin{proposition}
+Suppose $D \in \Div(X)$. Then $f \cdot s(D) \in H^0(X, \sL_D)$ if and only if $f \in L(D)$.
+\end{proposition}
+
+\begin{proposition}
+If $X$ is compact and $\deg D = 0$, then $L(D) \neq 0$ if and only if $D$ is principal. 
+\end{proposition}
+
+
+
+
+
+
+
+
+
+\end{document}
