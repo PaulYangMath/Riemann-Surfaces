@@ -1,4 +1,5 @@
 \documentclass[12pt]{article}
+\usepackage{mathrsfs} 
 \usepackage{amsmath}
 \usepackage{enumerate}
 \usepackage{amsthm}
@@ -206,6 +207,10 @@
  \newcommand{\tX}{\mathrm {X}}
  \newcommand{\tY}{\mathrm {Y}}
  \newcommand{\tZ}{\mathrm {Z}}
+ 
+ 
+ \newcommand{\shL}{\mathscr{L}}
+ \newcommand{\shO}{\mathscr{O}}
 %%%%%%% macros %%%%%
 
 %% my definitions %%%
@@ -371,6 +376,7 @@
 
 
 
+
 %%%%%%%%%%%%% new definitions for the positive mass paper %%%%%%%%%
 
 \newcommand{\sperp}{{\scriptscriptstyle \perp}}
@@ -392,18 +398,18 @@
 \date{\today}
 
 \maketitle
- 
+
+\textsl{These notes are mostly based on Prof. Hain's course on Riemann surfaces offered in Fall, 2015. Special thank goes to my classmate Xiaojun who generously lent me his notes so that I can piece up some missing parts in mine. The notes are constantly being edited and all errors are introduced by me.}
 \tableofcontents
 %\setcounter{secnumdepth}{1} 
 
 \setcounter{section}{0}
+
+
 \section{Basic Geometric Properties}
 
 \subsection{Some results from complex analysis}
-\subsubsection{Local normal form}
-Suppose $h : \Delta \to \Delta$ is a holomorphic function and $h(0) = 0$. 
 
-\subsubsection{Fundamental theorem of algebra}
 \subsection{Complex calculus on manifolds}
 
 \subsubsection{Almost complex structures}
@@ -803,11 +809,13 @@ The transition functions of a tensor product is the product of those of individu
 
 Now we wish to prove 
 \begin{theorem}
+\label{Picisocl}
 If $X$ is compact, then $\Pic(X) \iso \Cl(X)$. 
 \end{theorem}
 
 But we start from some propositions. 
 \begin{proposition}
+\label{Picsurj}
 If $D \in \Div(X)$, then there is a \holo line bundle and $L_D \to X$ and a \mero section $s_D$ with $D = \div(s_D)$. 
 \end{proposition}
 \begin{proof}
@@ -823,16 +831,74 @@ $$ s = f_\alpha s_\alpha = f_\beta s_\beta = f_\beta s_\alpha g_{\alpha \beta} $
 Therefore $f_\alpha = g_{\alpha \beta} f_\beta$. 
 \end{proof}
 
+\begin{proposition}
+\label{Picinj}
+$L_D$ is unique up to isomorphism. 
+\end{proposition}
+\begin{proof}
+Suppose we have two sections 
+\[
+\begin{tikzcd}
+L && L' \\
+{} & X \arrow{lu}{s} \arrow{ru}{s'}
+\end{tikzcd}
+\]
+where $(s) = (s') = D$. We obtain a section $\check{s} \tensor s$ of $L* \tensor L \iso \Hom(L, L')$, where $\check{s}$ denotes the dual section of $s$. $(\check{s} \tensor s) = (\check{s}) + (s') = -(s) + (s) = 0$. Therefore $\check{s} \tensor s$ is a nowhere vanishing holomorphic section of $\Hom(L, L')$, which provides an isomorphism $L \iso L'$. 
+\end{proof}
+Now Proposition~\ref{Picsurj} and Proposition~\ref{Picinj} together implies Theorem~\ref{Picisocl}. 
+
+\begin{definition}
+Let $X$ be a Riemann surface, $D \in \Div(X)$ be a divisor. Define 
+$$ \shL(D) = \{ f \in \fM(X) : (f) + D \ge 0 \}$$ 
+\end{definition}
+We think of divisor of $0$ as ``$\sum_p \infty [p]$", $0 \in \shL(D)$ for any $D$. 
 
 \begin{proposition}
-Suppose $D \in \Div(X)$. Then $f \cdot s(D) \in H^0(X, \sL_D)$ if and only if $f \in L(D)$.
+Suppose $D \in \Div(X)$. Then $f \cdot s_D \in H^0(X, \shL_D)$ if and only if $f \in \shL(D)$. Therefore the map $\shL(D) \to H^0(X, L_D)$ given by $f \mapsto fs_D$ is a bijection. 
 \end{proposition}
-
-
+\begin{proof}
+$$(f s_D) = (f) + (s_D) = (f) + D$$ 
+\end{proof}
 
 \begin{proposition}
-If $X$ is compact and $\deg D = 0$, then $L(D) \neq 0$ if and only if $D$ is principal. 
+Suppose $X$ is compact. If $\deg D < 0$, then $L(D) = 0$. 
 \end{proposition}
+\begin{proof}
+$\deg((f) + D) = \deg D < 0$, so $(f) + D \ge 0$ if and only if $f \equiv 0$. 
+\end{proof}
+
+\begin{corollary}
+$H^0(X, L_D) = 0$ if $\deg D < 0$. 
+\end{corollary}
+
+\begin{lemma}
+If $X$ is compact and $\deg D = 0$, then $\shL(D) \neq 0$ if and only if $D$ is principal. 
+\end{lemma}
+\begin{proof}
+Straightforward. 
+\end{proof}
+
+\begin{proposition}
+$L_{D_1} \iso L_{D_2}$ if and only if $D_1 = D_2 \mod \PDiv(X)$. 
+\end{proposition}
+\begin{proof}
+
+\end{proof}
+Goals: 
+\begin{enumerate}
+\item If $X$ is compact, then $H^0(X, L)$ is finite dimensional. 
+\item Riemann-Roch theorem: $$\dim H^0(X, L) - \dim H^0(X, L^* \tensor K_X) = \deg L + 1 - g$$
+\item Define $H^1(X, L)$. 
+\item Prove Serre-Duality: 
+$$ H^1(X, L) \tensor H^0(X, L^* \tensor K_X) \to H^1(X, K_X) \iso \IC $$
+is a non-degenerate pairing. 
+\end{enumerate}
+
+What will this achieve? 
+\begin{enumerate}
+\item If $d = \deg L > 2g - 2$, then $\deg(L^* \tensor K_X)(-d + 2g - 2) < 0$, and hence $H^0(X, L^* \tensor K_X) = 0$ and by Riemann-Roch theorem $H^0(X, L) \neq 0$ for $g \ge 1$. 
+\item Let $L$ be arbitrary. Define $L(nP) = L \tensor L(nP)$. Choose $n$ such that $n + d > 2g - 2$. Then $H^0(X, L(nP)) \neq 0$.    
+\end{enumerate}
 
 
 
@@ -840,6 +906,83 @@ If $X$ is compact and $\deg D = 0$, then $L(D) \neq 0$ if and only if $D$ is pri
 
 
 
+\section{Towards Riemann-Roch}
+\subsection{Topological interlude}
+In this section we use $D$ to denote the closed unit disk, and $D^*$ to denote $D$ with the origin punctured. 
+\begin{lemma}
+\label{diskcover}
+Every covering map $f : X \to D^*$ is isomorphic to one of the following: 
+\begin{enumerate}
+\item $D^* \to D^*$, given by $z \mapsto z^d$, if $\deg f = d < \infty$. 
+\item $\IH \to D^*$, given by $z \mapsto e^{2 \pi i z}$. 
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+If $f : X \to D^*$ is a covering map, then $X$ has a Riemann surface structure. $f_* \pi_1(X) \subseteq \pi_1(D^*) \iso \IZ$ is a subgroup, so either $f_* \pi_1(X) = d\IZ$ for some $d > 0$, or $0$. Covering space theory tells us that there is a bijective correspondence between subgroups of $\pi_1(D^*)$ and covering spaces $X \to D^*$ modulo isomorphism. 
+\end{proof}
 
+\begin{corollary}
+Every unramified proper non-constant \holo map $f : X \to D^*$, which extends uniquely to a proper \holo map $\overline{X} \to D$ where $\overline{X}$ is a Riemann surface.
+\end{corollary}
+\begin{remark}
+$\overline{X}$ is not the ``closure" of $X$, but it is the compactification of $X$. $D$ is compact, and that $\overline{X} \to D$ is proper in particular implies that $\overline{X}$ is compact. 
+\end{remark}
+\begin{proof}
+``proper" and ``unramified" means that $f : X \to D^*$ is a covering map. Let $ d = \deg f$. By Lemma~\ref{diskcover}, there is a biholomorphism $\varphi$, such that 
+\[
+\begin{tikzcd}
+X \arrow{rr}{\varphi} \arrow{dr}{f} && D^* \arrow{dl}{z \mapsto z^d} \\
+{} & D^*
+\end{tikzcd}
+\]
+Define $\overline{X} = X \cup_{\varphi^{-1}} D$, which is biholomorphic to $D = D^* \cup_{D^*} D$. 
+\[
+\begin{tikzcd}
+D^* \arrow{r}{\varphi^{-1}} \arrow{d}{\subseteq} & X \arrow{d}{\subseteq} \overline{X} \\
+D \arrow{r}{} & \overline{X}
+\end{tikzcd}
+\]
+
+\end{proof}
+
+\begin{theorem}
+\label{patch}
+Suppose that $f : X \to Y$ is a proper, non-constant \holo map. Let $C = \{ \text{critical values of }f\}$. Suppose that $Y = \overline{Y} - S$ where $C \cup S$ is closed and discrete in the Riemann surface $\overline{Y}$. Then there is a Riemann surface $\overline{X}$ and a proper \holo map $F : \overline{X} \to \overline{Y}$ with a closed and discrete subset $T$, such that 
+\begin{enumerate}
+\item $ X = \overline{X} - T$. 
+\item $F^{-1}(S) = T$. 
+\item $F|_X = f$. 
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+For each $y \in \overline{Y} - Y = S$ we can find a neighborhood $U_y$ of $y$ in $\overline{Y}$ such that $U_y \cap (S \cup C) = \{ y \}$ since $S \cup C$ is closed an discrete in $\overline{Y}$. We may also assume that $U_y$'s are disjoint. Let $U_y' = U_y - \{ y \}$. Since $f$ is proper, the restricted map $f^{-1}(U_y') \to U_y'$ is proper. Since $U_y \cap C = \emptyset$, this is unramified. In other words, the restricted map $f^{-1}(U_y') \to U_y'$ is a proper covering map. 
+
+Without loss of generality, we may assume $U_y' \iso D^*$. Now we apply Lemma~\ref{diskcover} to each component of $f^{-1}(U_y)$.   
+\end{proof}
+
+\paragraph{Bad Example} It is important that $C \cup S$ be closed and discrete in $\overline{Y}$. Consider the example $Y = \IC^*$ and $\overline{Y} = \IC$ (so $S = \{0\}$). Consider the curve 
+$$X =  \{ (z, w) \in \IC^2 : z^2 = \sin(\frac{1}{w}) \}  $$
+with projection $f : X \to Y$ given by $(z, w) \mapsto w$. $f$ is ramified over the locus $\sin(1/w) = 0$, i.e. where $w = (n \pi)^{-1}$, so 
+$$ C = \{ \frac{1}{n \pi} : n \in \IZ \} $$
+$C$ is closed and discrete in $Y$, but not in $\overline{Y}$. We cannot extend $f$ to $\overline{X} \to \overline{Y}$.
+
+\paragraph{Example} Let $X \in \IC^2$ be the curve described by $$y^2 = \prod_{j = 1}^n (x - a_j)$$ where all $a_1, \cdots, a_n$ are distinct. Let $Y = \IC$, $\overline{Y} = \IP^1$ adn $S = \{ \infty \}$. Let $f : X \to Y$ be the projection map $(x, y) \mapsto x$. Theorem~\ref{patch} tells us abstractly that there is a compactification $\overline{X}$. We want to understand this space $\overline{X}$. For example, what is $g(\overline{X})$? And what are the \holo 1-forms on $\overline{X}$?
+
+Since $\deg f = 2$, over $\infty$ there are two possibilities:
+(a picture here)
+We can in fact use Riemann-Hurwitz to determine which one occurs. Let $b$ be the branch divisor. Note that $b$ must always be even. Therefore, when $N = 2h + 1$, Riemann-Hurwitz says that 
+$$ \chi(\overline{X}) = 2 \chi(\IP^1) - b $$
+$b$ has to be $2h + 2$, so $f$ must be ramified once over $\infty$. Therefore 
+$$ 2 - 2g(\overline{X}) = 4 - (2h + 2) \Rightarrow g(\overline{X}) = h $$
+When $N = 2h + 2$, we still have that $g(\overline{X}) = h$. $b$ is still $2h + 2$, so over $\infty$ there is no ramification.  
+
+Now we look at \holo differentials when $N = 2h + 1$. We want to ask when is 
+$$ \frac{x^j dx}{y} $$
+\holo. This can be done by computing the divisors: 
+$$ (x) = 2 [\what{a_0}] - 2 [\what{\infty}],  \Rightarrow (x^j) = 2j [\what{a_0}] - 2 [\what{\infty}]$$
+
+Btw: It is not simply the compactification of $X$ in $\IP^2$.
+
+\subsection{Dolbeault cohomology}
 
 \end{document}
